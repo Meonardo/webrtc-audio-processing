@@ -135,6 +135,20 @@ if not have_arm
   ]
 endif
 
+api_headers = [
+  ['', 'channel_buffer.h'],
+  ['include', 'audio_util.h'],
+  ['resampler/include', 'push_resampler.h'],
+  ['resampler/include', 'resampler.h'],
+]
+
+foreach h : api_headers
+  install_headers(
+    join_paths(h[0], h[1]),
+    subdir: join_paths(include_subdir, 'common_audio', h[0])
+  )
+endforeach
+
 libcommon_audio = static_library('common_audio',
     common_audio_sources,
     dependencies: common_deps,

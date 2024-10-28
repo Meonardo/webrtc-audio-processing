@@ -26,12 +26,19 @@ base_sources = [
 base_headers = [
   [ '', 'arraysize.h' ],
   [ '', 'checks.h' ],
+  [ '', 'race_checker.h' ],
+  [ '', 'platform_thread_types.h' ],
+  [ '', 'thread_annotations.h' ],
+  [ '', 'swap_queue.h' ],
   [ '', 'ref_count.h' ],
   [ '', 'type_traits.h' ],
+  [ '', 'gtest_prod_util.h' ],
+  [ '', 'string_utils.h' ],
   [ 'numerics', 'safe_compare.h' ],
   [ 'system', 'file_wrapper.h' ],
   [ 'system', 'inline.h' ],
   [ 'system', 'rtc_export.h' ],
+  [ 'system', 'arch.h' ],
 ]
 
 foreach h : base_headers

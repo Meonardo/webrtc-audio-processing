@@ -1,0 +1,20 @@
+[constants]
+ndk_path    = '/home/meonardo/Android/NDK/android-ndk-r25c'
+toolchain_base = ndk_path + '/toolchains/llvm/prebuilt/linux-x86_64/bin/'
+toolchain   = ndk_path + '/toolchains/llvm/prebuilt/linux-x86_64/bin/aarch64-linux-android'
+api         = '29'
+
+[host_machine]
+system      = 'android'
+cpu_family  = 'aarch64'
+cpu         = 'aarch64'
+endian      = 'little'
+
+[properties]
+sys_root        = ndk_path + '/sysroot'
+
+[binaries]
+c           = toolchain + api + '-clang'
+cpp         = toolchain + api + '-clang++'
+ar          = toolchain_base + 'llvm-ar'
+strip       = toolchain_base + 'llvm-strip'

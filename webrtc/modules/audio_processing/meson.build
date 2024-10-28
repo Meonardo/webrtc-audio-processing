@@ -157,12 +157,6 @@ webrtc_audio_processing_sources = [
   'vad/voice_activity_detector.cc',
 ]
 
-webrtc_audio_processing_include_headers = [
-  'include/audio_processing.h',
-  'include/audio_processing_statistics.h',
-  'include/config.h',
-]
-
 extra_libs = []
 if have_x86
   extra_libs += [
@@ -195,9 +189,75 @@ if have_neon
   ]
 endif
 
-install_headers(webrtc_audio_processing_include_headers,
-    subdir: join_paths(include_subdir, 'modules', 'audio_processing', 'include')
-)
+api_headers = [
+  ['', 'audio_buffer.h'],
+
+  ['include', 'audio_processing.h'],
+  ['include', 'audio_processing_statistics.h'],
+  ['include', 'config.h'],
+  ['include', 'audio_frame_view.h'],
+
+  ['logging', 'apm_data_dumper.h'],
+
+  ['aec3', 'echo_canceller3.h'],
+  ['aec3', 'api_call_jitter_metrics.h'],
+  ['aec3', 'block_delay_buffer.h'],
+  ['aec3', 'block_framer.h'],
+  ['aec3', 'block_processor.h'],
+  ['aec3', 'config_selector.h'],
+  ['aec3', 'frame_blocker.h'],
+  ['aec3', 'multi_channel_content_detector.h'],
+  ['aec3', 'aec3_common.h'],
+  ['aec3', 'block.h'],
+  ['aec3', 'block_buffer.h'],
+  ['aec3', 'echo_remover.h'],
+  ['aec3', 'render_delay_buffer.h'],
+  ['aec3', 'render_delay_controller.h'],
+  ['aec3', 'downsampled_render_buffer.h'],
+  ['aec3', 'delay_estimate.h'],
+  ['aec3', 'echo_path_variability.h'],
+  ['aec3', 'render_buffer.h'],
+  ['aec3', 'fft_buffer.h'],
+  ['aec3', 'fft_data.h'],
+  ['aec3', 'spectrum_buffer.h'],
+
+  ['ns', 'noise_suppressor.h'],
+  ['ns', 'noise_estimator.h'],
+  ['ns', 'ns_common.h'],
+  ['ns', 'ns_config.h'],
+  ['ns', 'ns_fft.h'],
+  ['ns', 'speech_probability_estimator.h'],
+  ['ns', 'wiener_filter.h'],
+  ['ns', 'quantile_noise_estimator.h'],
+  ['ns', 'suppression_params.h'],
+  ['ns', 'signal_model_estimator.h'],
+  ['ns', 'histograms.h'],
+  ['ns', 'prior_signal_model.h'],
+  ['ns', 'prior_signal_model_estimator.h'],
+  ['ns', 'signal_model.h'],
+
+  ['', 'gain_controller2.h'],
+  ['agc2', 'adaptive_digital_gain_controller.h'],
+  ['agc2', 'cpu_features.h'],
+  ['agc2', 'gain_applier.h'],
+  ['agc2', 'input_volume_controller.h'],
+  ['agc2', 'limiter.h'],
+  ['agc2', 'noise_level_estimator.h'],
+  ['agc2', 'saturation_protector.h'],
+  ['agc2', 'speech_level_estimator.h'],
+  ['agc2', 'vad_wrapper.h'],
+  ['agc2', 'clipping_predictor.h'],
+  ['agc2', 'fixed_digital_level_estimator.h'],
+  ['agc2', 'interpolated_gain_curve.h'],
+  ['agc2', 'agc2_common.h'],
+]
+
+foreach h : api_headers
+  install_headers(
+    join_paths(h[0], h[1]),
+    subdir: join_paths(include_subdir, 'modules', 'audio_processing', h[0])
+  )
+endforeach
 
 libwebrtc_audio_processing = library(apm_project_name,
     webrtc_audio_processing_sources,
