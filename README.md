@@ -1,7 +1,7 @@
 # What's new in this fork?
 
 1. Added build script for Android arm64-v8a;
-2. Made more publich headers available;
+2. Made more public headers available;
 
 # About
 
