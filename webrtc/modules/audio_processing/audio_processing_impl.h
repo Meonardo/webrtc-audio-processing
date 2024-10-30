@@ -48,6 +48,10 @@
 #include "rtc_base/synchronization/mutex.h"
 #include "rtc_base/thread_annotations.h"
 
+#if defined(WEBRTC_USE_RNNOISE)
+#include "rnnoise.h"
+#endif
+
 namespace webrtc {
 
 class ApmDataDumper;
@@ -452,7 +456,11 @@ class AudioProcessingImpl : public AudioProcessing {
     std::unique_ptr<HighPassFilter> high_pass_filter;
     std::unique_ptr<EchoControl> echo_controller;
     std::unique_ptr<EchoControlMobileImpl> echo_control_mobile;
+#ifdef WEBRTC_USE_RNNOISE
+    DenoiseState* rnnoise_state;
+#else
     std::unique_ptr<NoiseSuppressor> noise_suppressor;
+#endif
     std::unique_ptr<TransientSuppressor> transient_suppressor;
     std::unique_ptr<CaptureLevelsAdjuster> capture_levels_adjuster;
   } submodules_;

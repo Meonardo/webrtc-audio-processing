@@ -84,8 +84,19 @@ if ['darwin', 'ios'].contains(host_system)
 elif host_system == 'android'
   os_cflags += ['-DWEBRTC_ANDROID', '-DWEBRTC_LINUX']
   os_deps += [cc.find_library('log')]
-  os_deps += [dependency('gnustl', required : get_option('gnustl'))]
+  # os_deps += [dependency('gnustl', required : get_option('gnustl'))]
+  # since we are targeting Android R18 or above we can use libc++ instead of gnustl 
   have_posix = true
+  rnnoise_path = get_option('rnnoise_path')
+  if rnnoise_path != ''
+    os_cflags += ['-DWEBRTC_USE_RNNOISE']
+    rnnoise_dep = declare_dependency(
+      include_directories: include_directories(rnnoise_path + '/include'),
+      link_args: [rnnoise_path + '/lib/librnnoise.a'],
+    )
+    os_deps += [rnnoise_dep]
+    install_headers(rnnoise_path + '/include/rnnoise.h', subdir: 'rnnoise')
+  endif
 elif host_system == 'linux'
   os_cflags += ['-DWEBRTC_LINUX', '-DWEBRTC_THREAD_RR']
   os_deps += [cc.find_library('rt', required : false)]

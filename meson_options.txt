@@ -4,3 +4,5 @@ option('gnustl', type: 'feature',
 option('neon', type: 'combo',
        choices: ['no', 'yes', 'auto', 'runtime'],
        description: '')
+option('rnnoise_path', type: 'string',
+       description: 'Use rnnoise for noise suppression instead the internal implementation, Android only')
