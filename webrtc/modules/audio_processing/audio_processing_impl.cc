@@ -1685,8 +1685,9 @@ int AudioProcessingImpl::ProcessCaptureStreamLocked() {
           kSampleRate48kHz && capture_buffer->num_channels() == 1) {
             // use rnnoise to process the audio
             auto captured_buffer = capture_buffer->channels()[0];
-            rnnoise_process_frame(submodules_.rnnoise_state, captured_buffer,
-                                  captured_buffer);
+            auto vad = rnnoise_process_frame(submodules_.rnnoise_state,
+                                             captured_buffer, captured_buffer);
+            RTC_LOG(LS_VERBOSE) << "vad: " << vad;
       }
 #else
       submodules_.noise_suppressor->Process(capture_buffer);
@@ -2453,7 +2454,7 @@ void AudioProcessingImpl::InitializeNoiseSuppressor() {
   if (config_.noise_suppression.enabled) {
 #ifdef WEBRTC_USE_RNNOISE
     // rnnoise is using 48000 sample rate, check it first
-    RTC_CHECK(proc_sample_rate_hz() != 48000) << "RNNoise is only supported for 48 kHz sample rate";
+    RTC_CHECK(proc_sample_rate_hz() == 48000) << "RNNoise is only supported for 48 kHz sample rate";
     submodules_.rnnoise_state = rnnoise_create(nullptr);
 #else
     auto map_level =

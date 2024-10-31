@@ -23,6 +23,8 @@ api_headers = [
   ['', 'scoped_refptr.h'],
   ['audio', 'echo_canceller3_config.h'],
   ['audio', 'echo_control.h'],
+  ['units', 'timestamp.h'],
+  ['units', 'time_delta.h'],
 ]
 
 foreach h : api_headers

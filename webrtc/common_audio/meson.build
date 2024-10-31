@@ -137,6 +137,9 @@ endif
 
 api_headers = [
   ['', 'channel_buffer.h'],
+  ['', 'wav_file.h'],
+  ['', 'wav_header.h'],
+  ['', 'ring_buffer.h'],
   ['include', 'audio_util.h'],
   ['resampler/include', 'push_resampler.h'],
   ['resampler/include', 'resampler.h'],

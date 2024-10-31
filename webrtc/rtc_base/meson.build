@@ -34,11 +34,19 @@ base_headers = [
   [ '', 'type_traits.h' ],
   [ '', 'gtest_prod_util.h' ],
   [ '', 'string_utils.h' ],
+  [ '', 'logging.h' ],
+  [ '', 'string_encode.h' ],
+  [ '', 'string_to_number.h' ],
   [ 'numerics', 'safe_compare.h' ],
+  [ 'numerics', 'divide_round.h' ],
+  [ 'numerics', 'safe_conversions.h' ],
+  [ 'numerics', 'safe_conversions_impl.h' ],
   [ 'system', 'file_wrapper.h' ],
   [ 'system', 'inline.h' ],
   [ 'system', 'rtc_export.h' ],
   [ 'system', 'arch.h' ],
+  [ 'strings', 'string_builder.h' ],
+  [ 'units', 'unit_base.h' ],
 ]
 
 foreach h : base_headers
