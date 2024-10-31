@@ -473,11 +473,11 @@ class AudioProcessingImpl : public AudioProcessing {
   struct ApmFormatState {
     ApmFormatState()
         :  // Format of processing streams at input/output call sites.
-          api_format({{{kSampleRate16kHz, 1},
-                       {kSampleRate16kHz, 1},
-                       {kSampleRate16kHz, 1},
-                       {kSampleRate16kHz, 1}}}),
-          render_processing_format(kSampleRate16kHz, 1) {}
+          api_format({{{kSampleRate48kHz, 1},
+                       {kSampleRate48kHz, 1},
+                       {kSampleRate48kHz, 1},
+                       {kSampleRate48kHz, 1}}}),
+          render_processing_format(kSampleRate48kHz, 1) {}
     ProcessingConfig api_format;
     StreamConfig render_processing_format;
   } formats_;
@@ -534,8 +534,8 @@ class AudioProcessingImpl : public AudioProcessing {
 
   struct ApmCaptureNonLockedState {
     ApmCaptureNonLockedState()
-        : capture_processing_format(kSampleRate16kHz),
-          split_rate(kSampleRate16kHz),
+        : capture_processing_format(kSampleRate48kHz, 1),
+          split_rate(kSampleRate48kHz),
           stream_delay_ms(0) {}
     // Only the rate and samples fields of capture_processing_format_ are used
     // because the forward processing number of channels is mutable and is
