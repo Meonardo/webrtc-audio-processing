@@ -2,6 +2,7 @@
 
 1. Added build script for Android arm64-v8a;
 2. Made more public headers available;
+3. Use `RNNoise` to replace internal `NoiseSuppression` module [WIP];
 
 # About
 
