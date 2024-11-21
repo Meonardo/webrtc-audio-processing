@@ -1,0 +1,15 @@
+[constants]
+toolchain_path    = '/home/meonardo/Hi3519/gcc-20231123-aarch64-v01c01-linux-gnu/aarch64-v01c01-linux-gnu-gcc/bin'
+toolchain         = toolchain_path + '/aarch64-linux-gnu'
+
+[host_machine]
+system      = 'linux'
+cpu_family  = 'aarch64'
+cpu         = 'aarch64'
+endian      = 'little'
+
+[binaries]
+c           = toolchain + '-gcc'
+cpp         = toolchain + '-g++'
+ar          = toolchain + '-ar'
+strip       = toolchain + '-strip'
